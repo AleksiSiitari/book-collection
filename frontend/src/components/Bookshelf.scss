@@ -1,0 +1,40 @@
+.bookshelf {
+    flex: 1;
+    list-style-type: none;
+    max-width: 50%;
+    border-spacing: 0;
+    border-radius: 5px;
+    border: 2px solid #DCDCDC;
+    height: fit-content;
+    margin-right: 10px;
+    table-layout: fixed;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+      
+    td, th {
+        border-top: 1px solid #DCDCDC; 
+        border-bottom: 1px solid #DCDCDC; 
+        text-align: left;
+        padding: 5px;
+        min-width: 60px;
+    }
+      tr.selected {
+            background-color: #DCDCDC;
+      }
+
+    .selected {
+        .indicator {
+            float: left;
+            width: 10px
+        };
+    };
+};
+
+@media only screen and (max-width: 600px) {
+    .bookshelf {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 20px;
+     }
+}

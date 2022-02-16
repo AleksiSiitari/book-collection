@@ -1,0 +1,26 @@
+.bookCover {
+    flex: 1;
+
+    fieldset {
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        background: #DCDCDC;
+    }
+
+    label {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .buttonRow {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .bookCover {
+      width: 100%;
+      max-width: 100%;
+     }
+  }

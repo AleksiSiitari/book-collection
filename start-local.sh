@@ -1,0 +1,1 @@
+(cd backend && yarn start) & cd frontend && PORT=8080 yarn start
