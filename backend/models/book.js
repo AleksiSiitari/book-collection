@@ -14,7 +14,7 @@ mongoose.connect(url)
 const bookSchema = new mongoose.Schema({
   title: { type: String, minlength: 3 },
   author: { type: String, minlength: 3 },
-  description: { type: String },
+  description: { type: String }
 })
 
 bookSchema.set('toJSON', {
