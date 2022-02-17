@@ -1,37 +1,38 @@
-import React, {useState, useEffect} from 'react';
-import Button from './Button';
-import { saveBook, deleteBook } from './../utils/api';
-import './BookCover.scss';
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import Button from './Button'
+import { saveBook, deleteBook } from './../utils/api'
+import './BookCover.scss'
 
-export default function BookCover(props) {
-    const { book, selectedBook, setSelectedBook, refreshBooks } = props;
+export default function BookCover (props) {
+  const { book, selectedBook, setSelectedBook, refreshBooks } = props
 
-    const [bookTitle, setBookTitle] = useState(selectedBook ? book.title : '');
-    const [bookAuthor, setBookAuthor] = useState(selectedBook ? book.bookAuthor : '');
-    const [bookDescription, setBookDescription] = useState(selectedBook ? book.description : '');
+  const [bookTitle, setBookTitle] = useState(selectedBook ? book.title : '')
+  const [bookAuthor, setBookAuthor] = useState(selectedBook ? book.bookAuthor : '')
+  const [bookDescription, setBookDescription] = useState(selectedBook ? book.description : '')
 
-    const clearFields = () => {
-        setBookTitle('');
-        setBookAuthor('');
-        setBookDescription('');
+  const clearFields = () => {
+    setBookTitle('')
+    setBookAuthor('')
+    setBookDescription('')
+  }
+
+  useEffect(() => {
+    if (book) {
+      setBookTitle(book.title)
+      setBookAuthor(book.author)
+      setBookDescription(book.description)
     }
+  }, [book])
 
-    useEffect(() => {
-        if (book) {
-          setBookTitle(book.title);
-          setBookAuthor(book.author);
-          setBookDescription(book.description);
-        }
-      }, [book])
+  const isValidNewBook = () => bookTitle?.length >= 3 && bookAuthor?.length >= 3
+  const refresh = () => {
+    refreshBooks()
+    setSelectedBook(undefined)
+    clearFields()
+  }
 
-    const isValidNewBook = () => bookTitle?.length >= 3 && bookAuthor?.length >= 3;
-    const refresh = () => {
-        refreshBooks();
-        setSelectedBook(undefined);
-        clearFields();
-    };
-
-    return (
+  return (
         <form onSubmit={event => event.preventDefault()} action="" className='bookCover'>
             <fieldset>
                 <h3>{!selectedBook ? `Add ${bookTitle} to your collection` : `Edit '${book.title}'`}</h3>
@@ -47,13 +48,20 @@ export default function BookCover(props) {
           </fieldset>
           <div className='buttonRow'>
             <Button label="Clear selection" onClick={() => {
-                setSelectedBook(undefined);
-                clearFields();
+              setSelectedBook(undefined)
+              clearFields()
             }} disabled={!selectedBook}/>
-            <Button label="Save New" onClick={() => saveBook({id: book?.id, title: bookTitle, author: bookAuthor, description: bookDescription}, refresh)} disabled={selectedBook || !isValidNewBook()}/>
-            <Button label="Save" onClick={() => saveBook({id: book?.id, title: bookTitle, author: bookAuthor, description: bookDescription}, refresh)} disabled={!selectedBook}/>
+            <Button label="Save New" onClick={() => saveBook({ id: book?.id, title: bookTitle, author: bookAuthor, description: bookDescription }, refresh)} disabled={selectedBook || !isValidNewBook()}/>
+            <Button label="Save" onClick={() => saveBook({ id: book?.id, title: bookTitle, author: bookAuthor, description: bookDescription }, refresh)} disabled={!selectedBook}/>
             <Button label="Delete" onClick={() => deleteBook(book.id, refresh)} disabled={!selectedBook}/>
           </div>
         </form>
-    );
+  )
 };
+
+BookCover.propTypes = {
+  book: PropTypes.Array,
+  selectedBook: PropTypes.object,
+  setSelectedBook: PropTypes.func,
+  refreshBooks: PropTypes.func
+}

@@ -1,22 +1,22 @@
-import React, { useState, useEffect }  from 'react';
-import './App.css';
-import Bookshelf from './components/Bookshelf';
-import BookCover from './components/BookCover';
-import { getBooks } from './utils/api';
+import React, { useState, useEffect } from 'react'
+import './App.css'
+import Bookshelf from './components/Bookshelf'
+import BookCover from './components/BookCover'
+import { getBooks } from './utils/api'
 
-function App() {
-  const [selectedBook, setSelectedBook] = useState(undefined);
-  const [books, setBooks] = useState([]);
+function App () {
+  const [selectedBook, setSelectedBook] = useState(undefined)
+  const [books, setBooks] = useState([])
 
   const refreshBooks = () => {
     getBooks().then(res => {
-      setBooks(res);
-    }); 
+      setBooks(res)
+    })
   }
 
   useEffect(() => {
-    refreshBooks();
-  }, []);
+    refreshBooks()
+  }, [])
 
   return (
     <div className="App">
@@ -26,7 +26,7 @@ function App() {
         <BookCover book={selectedBook} selectedBook={selectedBook} setSelectedBook={setSelectedBook} refreshBooks={refreshBooks} />
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,10 +1,12 @@
-import './Bookshelf.scss';
-import { isKeyboardSelectionEvent } from '../utils/browser-utils';
+import React from 'react'
+import PropTypes from 'prop-types'
+import './Bookshelf.scss'
+import { isKeyboardSelectionEvent } from '../utils/browser-utils'
 
-export default function Bookshelf(props) {
-    const { books, onSelectBook, selectedBook } = props;
+export default function Bookshelf (props) {
+  const { books, onSelectBook, selectedBook } = props
 
-    return (
+  return (
         <table className='bookshelf'>
             <tbody>
                 <tr>
@@ -18,7 +20,9 @@ export default function Bookshelf(props) {
                 </tr>
             )}
             {books.map(book => (
-                <tr tabIndex={0} onClick={() => onSelectBook(book)} onKeyDown={e => isKeyboardSelectionEvent(e) && onSelectBook(book)} key={book.id} className={book.id === selectedBook?.id ? 'selected' : ''}>
+                <tr tabIndex={0} onClick={() => {
+                  return onSelectBook(book)
+                }} onKeyDown={e => isKeyboardSelectionEvent(e) && onSelectBook(book)} key={book.id} className={book.id === selectedBook?.id ? 'selected' : ''}>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
                     <td className="description">{book.description}</td>
@@ -26,5 +30,11 @@ export default function Bookshelf(props) {
             ))}
             </tbody>
         </table>
-    );
+  )
 };
+
+Bookshelf.propTypes = {
+  books: PropTypes.Array,
+  onSelectBook: PropTypes.func,
+  selectedBook: PropTypes.object
+}
