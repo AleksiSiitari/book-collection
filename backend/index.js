@@ -16,7 +16,6 @@ app.get('/books', (req, res) => {
 
 app.get('/books/:bookid', (req, res) => {
     const bookId = req.params.bookid;
-    console.log(bookId);
     Book.findById(BookId).then(book => {
       if (book) {
         res.json(book)
@@ -35,7 +34,6 @@ app.post('/books', function (req, res) {
     });
     
     newBook.save().then(savedBook => {
-        console.log("res: ", savedBook);
         res.json(savedBook);
     }).catch(error => res.status(400).json({ error: error.message }));
 })

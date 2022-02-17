@@ -1,8 +1,11 @@
-# book-collection
-a simple single-page web application which manages a collection of books
+# Book Collection 📖
+a simple single-page React/Node web application which manages a collection of books
+
+
+![A picture of the UI](./ui-screenshot.png)
+
 
 ***
-
 ## Install
 
 ### Requirements
