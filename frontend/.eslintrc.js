@@ -20,5 +20,6 @@ module.exports = {
   ],
   ignorePatterns: ['yarn.lock', 'node_modules/', 'build/', 'public/'],
   rules: {
+    'react/jsx-indent': ['error', 2]
   }
 }
